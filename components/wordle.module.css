@@ -18,3 +18,19 @@
   align-items: center;
   margin: 5px;
 }
+
+.submittedGuess {
+  background-color: pink;
+}
+
+.currentGuess {
+  background-color: lightblue;
+}
+
+.correctChar {
+  background-color: green;
+}
+
+.presentChar {
+  background-color: yellow;
+}
