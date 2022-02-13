@@ -4,18 +4,13 @@ import styles from './wordle.module.css'
 import EmptyGuess from './empty-guess'
 import CurrentGuess from './current-guess'
 import SubmittedGuess from './submitted-guess'
+import { useWordOfTheDay } from '../hooks'
 
 const totalGuessMax = 6
 
-type Props = {
-  puzzleWord: string
-}
+const Wordle = () => {
 
-const Wordle = ({ puzzleWord }: Props) => {
-
-  if (puzzleWord.length !== 5) {
-    throw new Error(`Puzzle word length must be 5 characters. ${puzzleWord} is not valid.`)
-  }
+  const puzzleWord = useWordOfTheDay()
 
   const [guess, setGuess] = useState<string[]>([])
   const [submittedGuesses, setSubmittedGuesses] = useState<string[][]>([])
@@ -52,10 +47,10 @@ const Wordle = ({ puzzleWord }: Props) => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [guess.length])
 
-  console.log(submittedGuesses)
-
   const isCorrect = submittedGuesses.length > 0
     && submittedGuesses[submittedGuesses.length - 1].join('') === puzzleWord
+
+  const isFailure = !isCorrect && submittedGuesses.length === totalGuessMax
 
   const puzzleWordCharCount = useMemo(() => {
     return puzzleWord.split('').reduce<Record<string, number>>((acc, char) => {
@@ -71,20 +66,31 @@ const Wordle = ({ puzzleWord }: Props) => {
   return (
     <div className={styles.wordle}>
 
-      {submittedGuesses.map((submittedGuess, i) => (
-        <SubmittedGuess
-          key={i}
-          submittedGuess={submittedGuess}
-          puzzleWord={puzzleWord}
-          puzzleWordCharCount={puzzleWordCharCount}
-        />
-      ))}
+      <div className={styles.wordleBoard}>
 
-      {!isCorrect && <CurrentGuess guess={guess} />}
+        {submittedGuesses.map((submittedGuess, i) => (
+          <SubmittedGuess
+            key={i}
+            submittedGuess={submittedGuess}
+            puzzleWord={puzzleWord}
+            puzzleWordCharCount={puzzleWordCharCount}
+          />
+        ))}
 
-      {Array.from({ length: totalGuessMax - submittedGuesses.length - (isCorrect ? 0 : 1) }).map((_, i) => (
-        <EmptyGuess key={i} />
-      ))}
+        {!isCorrect && !isFailure && <CurrentGuess guess={guess} />}
+
+        {Array.from({ length: totalGuessMax - submittedGuesses.length - (isCorrect ? 0 : 1) }).map((_, i) => (
+          <EmptyGuess key={i} />
+        ))}
+
+        {isCorrect && (
+          <div className={styles.message}>You did it. You are the best!</div>
+        )}
+
+        {isFailure && (
+          <div className={styles.message}>Better luck next time.</div>
+        )}
+      </div>
 
     </div>
   )

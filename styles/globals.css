@@ -1,3 +1,13 @@
+:root {
+  --black: #141414;
+  --white: #EEF0F2;
+  --yellow: #EEC643;
+  --green: #419D78;
+
+  background-color: var(--black);
+  color: var(--white);
+}
+
 html,
 body {
   padding: 0;

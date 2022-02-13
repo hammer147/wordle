@@ -1,6 +1,10 @@
 .wordle {
   font-family: monospace;
   font-size: 60px;
+  height: 100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .word {
@@ -9,8 +13,16 @@
   /* gap: 5px; */
 }
 
+.submittedGuess {
+  /* background-color: pink; */
+}
+
+.currentGuess {
+  /* background-color: lightblue; */
+}
+
 .char {
-  border: 3px solid black;
+  border: 3px solid var(--white);
   height: 60px;
   width: 60px;
   display: flex;
@@ -19,18 +31,21 @@
   margin: 5px;
 }
 
-.submittedGuess {
-  background-color: pink;
-}
-
-.currentGuess {
-  background-color: lightblue;
+.guessedChar {
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .correctChar {
-  background-color: green;
+  background-color: var(--green);
 }
 
 .presentChar {
-  background-color: yellow;
+  background-color: var(--yellow);
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 24px;
+  text-align: center;
 }
