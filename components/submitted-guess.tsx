@@ -6,6 +6,11 @@ type Props = {
   puzzleWordCharCount: Record<string, number>
 }
 
+
+function useGuessChecker(submittedGuess: string[], puzzleWord: string, puzzleWordCharCount: Record<string, number>) {
+  // todo: custom hook
+}
+
 const SubmittedGuess = ({ submittedGuess, puzzleWord, puzzleWordCharCount }: Props) => {
 
   // clone because we don't want to mutate props

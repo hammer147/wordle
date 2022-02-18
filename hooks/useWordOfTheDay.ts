@@ -4,7 +4,7 @@ type Data = {
   word: string
 }
 
-export function useWordOfTheDay () {
+export function useWordOfTheDay() {
 
   const [word, setWord] = useState('')
 
