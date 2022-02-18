@@ -1,3 +1,4 @@
+import { useGuessChecker } from '../hooks'
 import styles from './wordle.module.css'
 
 type Props = {
@@ -6,40 +7,20 @@ type Props = {
   puzzleWordCharCount: Record<string, number>
 }
 
-
-function useGuessChecker(submittedGuess: string[], puzzleWord: string, puzzleWordCharCount: Record<string, number>) {
-  // todo: custom hook
-}
-
 const SubmittedGuess = ({ submittedGuess, puzzleWord, puzzleWordCharCount }: Props) => {
 
-  // clone because we don't want to mutate props
-  // remove the correct characters from the charMap
-  const charMap = {...puzzleWordCharCount}
-  submittedGuess.forEach((guessChar,i) => {
-    const isCorrect =  guessChar === puzzleWord[i]
-    if (isCorrect) {
-      charMap[guessChar] -= 1
-    }
-  })
+  const checkedGuess = useGuessChecker(submittedGuess, puzzleWord, puzzleWordCharCount)
 
   return (
     <div className={`${styles.word} ${styles.submittedGuess}`}>
 
-      {submittedGuess.map((guessChar, i) => {
-        const isCorrect = guessChar === puzzleWord[i]
-
-        let isPresent = false
-        // charMap only holds chars that are present but not in the right position
-        if (!isCorrect && !!charMap[guessChar]) {
-          isPresent = true
-          charMap[guessChar] -= 1
-        }
-
+      {checkedGuess.map(({ status, guessChar }, i) => {
+        const isCorrect = status === 'correct'
+        const isPresent = status === 'present'
         return (
           <span
             key={i}
-            className={`${styles.char} ${styles.guessedChar} ${isCorrect ? styles.correctChar : ''} ${isPresent ? styles.presentChar: ''}`}
+            className={`${styles.char} ${styles.guessedChar} ${isCorrect ? styles.correctChar : ''} ${isPresent ? styles.presentChar : ''}`}
           >
             {guessChar}
           </span>
