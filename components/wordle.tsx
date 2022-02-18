@@ -4,7 +4,7 @@ import styles from './wordle.module.css'
 import EmptyGuess from './empty-guess'
 import CurrentGuess from './current-guess'
 import SubmittedGuess from './submitted-guess'
-import { useWordOfTheDay } from '../hooks'
+import { useCharCountMap, useWordOfTheDay } from '../hooks'
 
 const totalGuessMax = 6
 
@@ -52,16 +52,7 @@ const Wordle = () => {
 
   const isFailure = !isCorrect && submittedGuesses.length === totalGuessMax
 
-  const puzzleWordCharCount = useMemo(() => {
-    return puzzleWord.split('').reduce<Record<string, number>>((acc, char) => {
-      if (!acc.hasOwnProperty(char)) {
-        acc[char] = 1
-      } else {
-        acc[char] += 1
-      }
-      return acc
-    }, {})
-  }, [puzzleWord])
+  const puzzleWordCharCount = useCharCountMap(puzzleWord)
 
   return (
     <div className={styles.wordle}>
