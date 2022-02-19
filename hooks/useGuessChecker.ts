@@ -1,5 +1,3 @@
-type GuessedCharStatus = 'correct' | 'incorrect' | 'present'
-
 export function useGuessChecker(submittedGuess: string[], puzzleWord: string, puzzleWordCharCount: Record<string, number>) {
   const charMap = { ...puzzleWordCharCount }
 
@@ -12,7 +10,7 @@ export function useGuessChecker(submittedGuess: string[], puzzleWord: string, pu
   })
 
   const checkedGuess = submittedGuess.map(
-    (guessChar, i): { status: GuessedCharStatus, guessChar: string } => {
+    (guessChar, i): { status: 'correct' | 'incorrect' | 'present', guessChar: string } => {
       const isCorrect = guessChar === puzzleWord[i]
       let isPresent = false
       // charMap only holds chars that are present but not in the right position
@@ -21,7 +19,7 @@ export function useGuessChecker(submittedGuess: string[], puzzleWord: string, pu
         charMap[guessChar] -= 1
       }
       return {
-        status: isCorrect ? "correct" : isPresent ? "present" : "incorrect",
+        status: isCorrect ? 'correct' : isPresent ? 'present' : 'incorrect',
         guessChar
       }
     })

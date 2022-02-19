@@ -1,4 +1,4 @@
-import styles from './wordle.module.css'
+import styles from '../../styles/wordle.module.css'
 
 const EmptyGuess = () => {
   return (

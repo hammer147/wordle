@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { produce } from 'immer'
-import styles from './wordle.module.css'
 import EmptyGuess from './empty-guess'
 import CurrentGuess from './current-guess'
 import SubmittedGuess from './submitted-guess'
-import { useCharCountMap, useWordOfTheDay } from '../hooks'
+import { useCharCountMap, useWordOfTheDay } from '../../hooks'
+import styles from '../../styles/wordle.module.css'
 
 const totalGuessMax = 6
 
@@ -57,7 +57,7 @@ const Wordle = () => {
   return (
     <div className={styles.wordle}>
 
-      <div className={styles.wordleBoard}>
+      <div>
 
         {submittedGuesses.map((submittedGuess, i) => (
           <SubmittedGuess

@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import Wordle from '../components/wordle'
+import Wordle from '../components/wordle/wordle'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {

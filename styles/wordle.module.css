@@ -7,18 +7,16 @@
   align-items: center;
 }
 
+.message {
+  margin-top: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
 .word {
   display: flex;
   justify-content: center;
   /* gap: 5px; */
-}
-
-.submittedGuess {
-  /* background-color: pink; */
-}
-
-.currentGuess {
-  /* background-color: lightblue; */
 }
 
 .char {
@@ -42,10 +40,4 @@
 
 .presentChar {
   background-color: var(--yellow);
-}
-
-.message {
-  margin-top: 20px;
-  font-size: 24px;
-  text-align: center;
 }

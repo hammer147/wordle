@@ -1,4 +1,4 @@
-import styles from './wordle.module.css'
+import styles from '../../styles/wordle.module.css'
 
 type Props = {
   guess: string[]
@@ -6,7 +6,7 @@ type Props = {
 
 const CurrentGuess = ({ guess }: Props) => {
   return (
-    <div className={`${styles.word} ${styles.currentGuess}`}>
+    <div className={styles.word}>
 
       {Array.from({ length: 5 }).map((_, i) => (
         <span className={styles.char} key={i}>{guess[i] ?? ''}</span>

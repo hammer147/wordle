@@ -1,5 +1,5 @@
-import { useGuessChecker } from '../hooks'
-import styles from './wordle.module.css'
+import { useGuessChecker } from '../../hooks'
+import styles from '../../styles/wordle.module.css'
 
 type Props = {
   submittedGuess: string[]
@@ -12,7 +12,7 @@ const SubmittedGuess = ({ submittedGuess, puzzleWord, puzzleWordCharCount }: Pro
   const checkedGuess = useGuessChecker(submittedGuess, puzzleWord, puzzleWordCharCount)
 
   return (
-    <div className={`${styles.word} ${styles.submittedGuess}`}>
+    <div className={styles.word}>
 
       {checkedGuess.map(({ status, guessChar }, i) => {
         const isCorrect = status === 'correct'
