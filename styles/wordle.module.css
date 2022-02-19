@@ -2,7 +2,7 @@
   font-family: monospace;
   font-size: 60px;
   height: 100vh;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -30,14 +30,100 @@
 }
 
 .guessedChar {
-  border: 0;
-  background-color: rgba(255, 255, 255, 0.1);
+  /* animation: flipIn 1s linear forwards, bgIncorrect 1s linear forwards; */
+  animation: flipIn, bgIncorrect;
 }
 
 .correctChar {
-  background-color: var(--green);
+  /* animation: flipIn 1s linear forwards, bgCorrect 1s linear forwards; */
+  animation: flipIn, bgCorrect;
 }
 
 .presentChar {
-  background-color: var(--yellow);
+  /* animation: flipIn 1s linear forwards, bgPresent 1s linear forwards; */
+  animation: flipIn, bgPresent;
+}
+
+/* place this below the classes that use the animations */
+.guessedChar,
+.correctChar,
+.presentChar {
+  animation-duration: 1s, 1s;
+  animation-timing-function: linear, linear;
+  animation-fill-mode: forwards, forwards;
+}
+
+@keyframes flipIn {
+  0% {
+    border: 3px solid var(--white);
+    transform: rotateX(0deg);
+  }
+
+  49% {
+    border: 3px solid var(--white);
+  }
+
+  50% {
+    border: 0;
+    transform: rotateX(90deg);
+  }
+
+  100% {
+    border: 0;
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes bgIncorrect {
+  0% {
+    background-color: transparent;
+  }
+
+  49% {
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes bgCorrect {
+  0% {
+    background-color: transparent;
+  }
+
+  49% {
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: var(--green)
+  }
+
+  100% {
+    background-color: var(--green);
+  }
+}
+
+@keyframes bgPresent {
+  0% {
+    background-color: transparent;
+  }
+
+  49% {
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: var(--yellow)
+  }
+
+  100% {
+    background-color: var(--yellow);
+  }
 }
