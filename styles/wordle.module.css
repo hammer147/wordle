@@ -53,6 +53,23 @@
   animation-fill-mode: forwards, forwards;
 }
 
+/* start flipping the next char when the previous is half way  */
+.char:nth-of-type(2) {
+  animation-delay: 500ms;
+}
+
+.char:nth-of-type(3) {
+  animation-delay: 1000ms;
+}
+
+.char:nth-of-type(4) {
+  animation-delay: 1500ms;
+}
+
+.char:nth-of-type(5) {
+  animation-delay: 2000ms;
+}
+
 @keyframes flipIn {
   0% {
     border: 3px solid var(--white);
