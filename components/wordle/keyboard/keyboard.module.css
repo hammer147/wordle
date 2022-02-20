@@ -1,0 +1,28 @@
+.wrapper {
+  background-color: rgb(79, 9, 9);
+  padding: 5px;
+  margin-bottom: 15px;
+  /* width: 200px; */
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.key {
+  background-color: var(--gray);
+  color: var(--black);
+  border-radius: 3px;
+  font-family: sans-serif;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 0 6px;
+  margin: 2px;
+  width: 35px;
+}
+
+.key:hover {
+  background-color: var(--gray-dark);
+}

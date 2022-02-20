@@ -3,6 +3,9 @@
   --white: #EEF0F2;
   --yellow: #EEC643;
   --green: #419D78;
+  --gray: #b4b8bb;
+  --gray-dark: #9fa4a8;
+
 
   background-color: var(--black);
   color: var(--white);

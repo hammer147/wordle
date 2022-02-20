@@ -5,6 +5,7 @@ import CurrentGuess from './current-guess'
 import SubmittedGuess from './submitted-guess'
 import { useCharCountMap, useWordOfTheDay } from '../../hooks'
 import styles from '../../styles/wordle.module.css'
+import Keyboard from './keyboard/keyboard'
 
 const totalGuessMax = 6
 
@@ -57,31 +58,36 @@ const Wordle = () => {
   return (
     <div className={styles.wordle}>
 
-      <div>
+      <div className={styles.boardPositioner}>
 
-        {submittedGuesses.map((submittedGuess, i) => (
-          <SubmittedGuess
-            key={i}
-            submittedGuess={submittedGuess}
-            puzzleWord={puzzleWord}
-            puzzleWordCharCount={puzzleWordCharCount}
-          />
-        ))}
+        <div className={styles.board}>
+          {submittedGuesses.map((submittedGuess, i) => (
+            <SubmittedGuess
+              key={i}
+              submittedGuess={submittedGuess}
+              puzzleWord={puzzleWord}
+              puzzleWordCharCount={puzzleWordCharCount}
+            />
+          ))}
 
-        {!isCorrect && !isFailure && <CurrentGuess guess={guess} />}
+          {!isCorrect && !isFailure && <CurrentGuess guess={guess} />}
 
-        {Array.from({ length: totalGuessMax - submittedGuesses.length - (isCorrect ? 0 : 1) }).map((_, i) => (
-          <EmptyGuess key={i} />
-        ))}
+          {Array.from({ length: totalGuessMax - submittedGuesses.length - (isCorrect ? 0 : 1) }).map((_, i) => (
+            <EmptyGuess key={i} />
+          ))}
 
-        {isCorrect && (
-          <div className={styles.message}>You did it. You are the best!</div>
-        )}
+          {isCorrect && (
+            <div className={styles.message}>You did it. You are the best!</div>
+          )}
 
-        {isFailure && (
-          <div className={styles.message}>Better luck next time.</div>
-        )}
+          {isFailure && (
+            <div className={styles.message}>Better luck next time.</div>
+          )}
+        </div>
+
       </div>
+
+      <Keyboard />
 
     </div>
   )

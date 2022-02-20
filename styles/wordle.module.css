@@ -3,9 +3,23 @@
   font-size: 60px;
   height: 100vh;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* gap: 20px; */
+}
+
+.boardPositioner {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+/* .board {
+
+} */
 
 .message {
   margin-top: 20px;
