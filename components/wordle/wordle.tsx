@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { produce } from 'immer'
 import EmptyGuess from './empty-guess'
 import CurrentGuess from './current-guess'
@@ -16,37 +16,37 @@ const Wordle = () => {
   const [guess, setGuess] = useState<string[]>([])
   const [submittedGuesses, setSubmittedGuesses] = useState<string[][]>([])
 
-  useEffect(() => {
+  const handleKeyInput = useCallback((key: string) => {
+    const isChar = /^[a-z]$/.test(key)
+    const isBackspace = key === 'Backspace'
+    const isSubmit = key === 'Enter'
+    const isGuessFinished = guess.length === 5
 
-    const handleKeyDown = ({ key }: KeyboardEvent) => {
-
-      const isChar = /^[a-z]$/.test(key)
-      const isBackspace = key === 'Backspace'
-      const isSubmit = key === 'Enter'
-      const isGuessFinished = guess.length === 5
-
-      if (isBackspace) {
-        // setGuess(prev => {
-        //   const temp = [...prev]
-        //   temp.pop()
-        //   return temp
-        // })
-        setGuess(produce(draft => {
-          draft.pop()
-          return draft
-        }))
-      } else if (isChar && guess.length < 5) {
-        setGuess(prev => [...prev, key])
-      } else if (isGuessFinished && isSubmit) {
-        setSubmittedGuesses(prev => [...prev, guess])
-        setGuess([])
-      }
+    if (isBackspace) {
+      // setGuess(prev => {
+      //   const temp = [...prev]
+      //   temp.pop()
+      //   return temp
+      // })
+      setGuess(produce(draft => {
+        draft.pop()
+        return draft
+      }))
+    } else if (isChar && guess.length < 5) {
+      setGuess(prev => [...prev, key])
+    } else if (isGuessFinished && isSubmit) {
+      setSubmittedGuesses(prev => [...prev, guess])
+      setGuess([])
     }
+  }, [guess])
 
+  useEffect(() => {
+    const handleKeyDown = ({ key }: KeyboardEvent) => {
+      handleKeyInput(key)
+    }
     window.addEventListener('keydown', handleKeyDown)
-
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [guess.length])
+  }, [handleKeyInput])
 
   const isCorrect = submittedGuesses.length > 0
     && submittedGuesses[submittedGuesses.length - 1].join('') === puzzleWord
@@ -87,7 +87,7 @@ const Wordle = () => {
 
       </div>
 
-      <Keyboard />
+      <Keyboard handleKeyInput={handleKeyInput} />
 
     </div>
   )

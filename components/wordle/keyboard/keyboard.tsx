@@ -1,19 +1,21 @@
 import { memo } from 'react'
 import styles from './keyboard.module.css'
 
-const Keyboard = () => {
+type KeyboardProps = {
+  handleKeyInput: (key: string) => void
+}
 
-  const top = 'qwertyuiop'.split('').map(char => (
-    <span className={styles.key} key={char}>{char}</span>
-  ))
-  const middle = 'asdfghjkl'.split('').map(char => (
-    <span className={styles.key} key={char}>{char}</span>
-  ))
-  const bottom = 'zxcvbnm'.split('').map(char => (
-    <span className={styles.key} key={char}>{char}</span>
-  ))
+const Keyboard = ({ handleKeyInput }: KeyboardProps) => {
 
-  console.log('keyboard renders')
+  const top = 'q w e r t y u i o p'.split(' ').map(char => (
+    <Key key={char} keyName={char} handleKeyInput={handleKeyInput} />
+  ))
+  const middle = 'a s d f g h j k l'.split(' ').map(char => (
+    <Key key={char} keyName={char} handleKeyInput={handleKeyInput} />
+  ))
+  const bottom = 'Enter z x c v b n m Back'.split(' ').map(char => (
+    <Key key={char} keyName={char} handleKeyInput={handleKeyInput} />
+  ))
 
   return (
     <div className={styles.wrapper}>
@@ -23,5 +25,19 @@ const Keyboard = () => {
     </div>
   )
 }
+
+type KeyProps = {
+  keyName: string,
+  handleKeyInput: (key: string) => void
+}
+
+const Key = ({ keyName, handleKeyInput }: KeyProps) => (
+  <span
+    className={`${styles.key} ${keyName.length > 1 ? styles.small : ''}`}
+    onClick={() => handleKeyInput(keyName)}
+  >
+    {keyName}
+  </span>
+)
 
 export default memo(Keyboard)

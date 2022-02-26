@@ -7,12 +7,13 @@ const wordsDb = ['toxic', 'space', 'table', 'games']
 
 const millisecondsToDays = (milliseconds: number) => Math.floor(milliseconds / 1000 / 60 / 60 / 24)
 
-const dayStart = millisecondsToDays(new Date('2022-02-24').valueOf())
-const dayIncomingRequest = millisecondsToDays(new Date().valueOf())
-const daysSinceStart = dayIncomingRequest - dayStart
-const idx = daysSinceStart % wordsDb.length 
-const word = wordsDb[idx]
-
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  
+  const dayStart = millisecondsToDays(new Date('2022-02-24').valueOf())
+  const dayIncomingRequest = millisecondsToDays(new Date().valueOf())
+  const daysSinceStart = dayIncomingRequest - dayStart
+  const idx = daysSinceStart % wordsDb.length 
+  const word = wordsDb[idx]
+
   res.status(200).json({ word })
 }
