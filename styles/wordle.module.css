@@ -1,6 +1,6 @@
 .wordle {
   font-family: monospace;
-  font-size: 60px;
+  font-size: 50px;
   height: 100vh;
   display: flex;
   flex-direction: column;
