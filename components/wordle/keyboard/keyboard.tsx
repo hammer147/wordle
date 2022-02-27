@@ -7,14 +7,14 @@ type KeyboardProps = {
 
 const Keyboard = ({ handleKeyInput }: KeyboardProps) => {
 
-  const top = 'q w e r t y u i o p'.split(' ').map(char => (
-    <Key key={char} keyName={char} handleKeyInput={handleKeyInput} />
+  const top = 'q w e r t y u i o p'.split(' ').map(item => (
+    <Key key={item} keyDisplay={item} handleKeyInput={handleKeyInput} />
   ))
-  const middle = 'a s d f g h j k l'.split(' ').map(char => (
-    <Key key={char} keyName={char} handleKeyInput={handleKeyInput} />
+  const middle = 'a s d f g h j k l'.split(' ').map(item => (
+    <Key key={item} keyDisplay={item} handleKeyInput={handleKeyInput} />
   ))
-  const bottom = 'Enter z x c v b n m Back'.split(' ').map(char => (
-    <Key key={char} keyName={char} handleKeyInput={handleKeyInput} />
+  const bottom = 'Enter z x c v b n m Back'.split(' ').map(item => (
+    <Key key={item} keyDisplay={item} handleKeyInput={handleKeyInput} />
   ))
 
   return (
@@ -27,17 +27,26 @@ const Keyboard = ({ handleKeyInput }: KeyboardProps) => {
 }
 
 type KeyProps = {
-  keyName: string,
+  keyDisplay: string,
   handleKeyInput: (key: string) => void
 }
 
-const Key = ({ keyName, handleKeyInput }: KeyProps) => (
-  <span
-    className={`${styles.key} ${keyName.length > 1 ? styles.small : ''}`}
-    onClick={() => handleKeyInput(keyName)}
-  >
-    {keyName}
-  </span>
-)
+const Key = ({ keyDisplay, handleKeyInput }: KeyProps) => {
+  let key: string // the value we would get from a real keyboard event
+  if (keyDisplay === 'Back') {
+    key = 'Backspace'
+  } else {
+    key = keyDisplay
+  }
+
+  return (
+    <span
+      className={`${styles.key} ${keyDisplay.length > 1 ? styles.small : ''}`}
+      onClick={() => handleKeyInput(key)}
+    >
+      {keyDisplay}
+    </span>
+  )
+}
 
 export default memo(Keyboard)

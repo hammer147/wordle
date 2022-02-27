@@ -42,6 +42,7 @@ const Wordle = () => {
 
   useEffect(() => {
     const handleKeyDown = ({ key }: KeyboardEvent) => {
+      // console.log(key)
       handleKeyInput(key)
     }
     window.addEventListener('keydown', handleKeyDown)
