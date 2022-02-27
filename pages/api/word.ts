@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = { word: string }
 
-const wordsDb = ['toxic', 'space', 'table', 'games']
+const wordsDb = ['toxic', 'space', 'table', 'games'] // must always be 5 letters
 
 const millisecondsToDays = (milliseconds: number) => Math.floor(milliseconds / 1000 / 60 / 60 / 24)
 
