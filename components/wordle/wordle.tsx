@@ -58,6 +58,7 @@ const Wordle = () => {
 
   return (
     <div className={styles.wordle}>
+      <h2>Wordle</h2>
 
       <div className={styles.boardPositioner}>
 
