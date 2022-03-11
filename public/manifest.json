@@ -1,7 +1,8 @@
 {
     "theme_color": "#419D78",
     "background_color": "#419D78",
-    "display": "standalone",
+    "display": "fullscreen",
+    "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
     "name": "Wordle",
