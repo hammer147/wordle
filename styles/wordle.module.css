@@ -9,6 +9,10 @@
   /* gap: 20px; */
 }
 
+.wordle h2 {
+  margin-bottom: 0;
+}
+
 .boardPositioner {
   flex-grow: 1;
   display: flex;
